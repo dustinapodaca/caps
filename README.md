@@ -1,37 +1,47 @@
-# package.json Notes:
+# Project: Event Driven Applications
 
-## For React Applications
+### Author: Dustin Apodaca
 
- To deploy your application at GitHub pages, you'll need to add a home page property to your package.json which points to the deployed base URL of your GitHub Pages site.
- 
- *NOTE: This will break deployments to other hosting services such as Netlify, Vercel, or AWS Amplify, so if you later wish to deploy there, remove this property completely*
- 
-     {
-       "homepage": "https://yourname.github.io/repository-name"
-     }
+### Problem Domain
 
-## Node / Express Applications
+- Build an application for a product called CAPS - The Code Academy Parcel Service. The purpose is to build out a system that emulates a real world supply chain. CAPS will simulate a delivery service where vendors (such a flower shops) will ship products using our delivery service and when our drivers deliver them, each vendor will be notified that their customers received what they purchased.
 
-### For Tests
-Your Scripts section should have the following, so that you can easily run tests locally and in your CI
+- An event driven application that “distributes” the responsibility for logging to separate modules, using only events to trigger logging based on activity.
 
-  "scripts": {
-    "start": "node index.js",
-    "lint": "eslint **/*.js",
-    "test": "jest --verbose --coverage",
-    "test-watch": "jest --watchAll --verbose --coverage"
-},
+### Links and Resources
+
+- [CI/CD](https://github.com/dustinapodaca/caps/actions) (GitHub Actions)
+<!-- - [Prod Deployment]()
+- [Dev Deployment]() -->
+
+#### How to initialize/run your application (where applicable)
+
+- `npm start`
+- `node hub.js`
+
+#### Features / Routes
+
+- Hub:
+  - `logger` - to log all events
+  - `eventPool.on('event', payload)` - to listen for all events
+
+- Vendor:
+  - `pickup` - emits to simulate a new order being placed and ready for pickup
+  - `delivered` - listens to simulate a package being delivered
+
+- Driver:
+  - `pickedUp` - listens to simulate a package being picked up
+  - `in-transit` - emits to simulate a package in transit
+  - `delivered` - emits to simulate a package being delivered
 
 
-### For NPM Modules
+#### Tests
 
-If you are creating a module to deploy at NPM, you'll want a "bin" section that identifies the name of the global command to run and your .js file that runs when called.
+- How do you run tests?
+  - `npm test`
 
-"bin": {
-    "fetch": "index.js"
-}
+#### UML
 
-Additionally, that file should have as it's first line, so that it'll run without having to type "node filename.js" every time
+Link to an image of the UML for your application and response to events:
 
-#!/usr/bin/env node
-
+![UML](./assets/img/UML-EventDrivenListener.png)
