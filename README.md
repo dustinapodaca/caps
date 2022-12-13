@@ -1,8 +1,8 @@
 # Project: CAPS
 ### Author: Dustin Apodaca
 
-## Phase 1: Event Driven Applications
-## Phase 2: Socket.io
+### Phase 1: Event Driven Applications
+### Phase 2: Socket.io
 
 
 ##  Problem Domain
@@ -68,9 +68,8 @@
   - `npm test`
 
 ##  UML
-### Phase 1: Event Driven Applications
-
 Link to an image of the UML for your application and response to events:
+### Phase 1: Event Driven Applications
 
 ![UML](./assets/img/UML-EventDrivenListener.png)
 
