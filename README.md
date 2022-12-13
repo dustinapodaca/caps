@@ -1,5 +1,6 @@
 # Project: CAPS
 ### Author: Dustin Apodaca
+---
 
 ### Phase 1: Event Driven Applications
 ### Phase 2: Socket.io
@@ -44,7 +45,7 @@
   - `in-transit` - emits to simulate a package in transit
   - `delivered` - emits to simulate a package being delivered
 
-### Phase 2: Features / Routes - Socket.io
+### Phase 2: Socket.io
 
 - Socket.io Hub:
   - `logger` - to log all events
