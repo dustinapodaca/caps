@@ -36,3 +36,9 @@ function deliveredHandler(payload) {
   };
   console.log('EVENT', event);
 }
+
+module.exports = {
+  pickUpHandler,
+  inTransitHandler,
+  deliveredHandler,
+};
