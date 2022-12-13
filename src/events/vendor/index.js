@@ -7,7 +7,7 @@ const chance = new Chance();
 function readyForPickUp() {
   setInterval(() => {
     let payload = {
-      store: chance.company(),
+      store: '1-206-flowers',
       orderID: chance.guid(),
       customer: chance.name(),
       address: chance.address({ short_suffix: true }),
@@ -18,6 +18,8 @@ function readyForPickUp() {
     console.log('Thank you,', payload.customer);
   });
 }
+
+readyForPickUp();
 
 module.exports = readyForPickUp;
 
