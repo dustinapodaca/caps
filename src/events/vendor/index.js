@@ -30,6 +30,9 @@ function readyForPickUp() {
   // });
   socket.on('delivered', (payload) => {
     console.log('Thank you,', payload.customer);
+    console.log('Order:', payload.orderID);
+    console.log('Has been successfully delivered to: ');
+    console.log(payload.address);
   });
 };
 

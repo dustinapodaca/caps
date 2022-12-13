@@ -1,6 +1,6 @@
 'use strict';
 
-const eventPool = require('../../../EventEmitter');
+// const eventPool = require('../../../EventEmitter');
 
 require('dotenv').config();
 const { io } = require('socket.io-client');
@@ -13,13 +13,13 @@ socket.on('pickup', pickedUp);
 function pickedUp(payload) {
   setTimeout(() => {
     console.log('DRIVER: picked up', payload.orderID);
-    eventPool.emit('IN-TRANSIT', payload);
+    // eventPool.emit('IN-TRANSIT', payload);
     socket.emit('in-transit', payload);
   }, 1000);
 
   setTimeout(() => {
     console.log('DRIVER: delivered', payload.orderID);
-    eventPool.emit('DELIVERED', payload);
+    // eventPool.emit('DELIVERED', payload);
     socket.emit('delivered', payload);
   }, 2000);
 }
