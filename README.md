@@ -29,6 +29,9 @@
 
 - `npm start`
 - `node hub.js`
+- `node index.js`
+- `nodemon`
+
 ##  Features / Routes
 ### Phase 1: Event Driven Applications
 
