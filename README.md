@@ -77,6 +77,6 @@ Link to an image of the UML for your application and response to events:
 
 ![UML](./assets/img/UML-EventDrivenListener.png)
 
-### Phase 2: UML - Socket.io
+### Phase 2: Socket.io
 
 ![UML](./assets/img/UML-SocketListener.png)
