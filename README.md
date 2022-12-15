@@ -26,6 +26,11 @@
 
 - Every event sent will be logged and held onto by the server until the intended recipient acknowledges that they received the message. At any time, a subscriber can get all of the messages they might have missed.
 
+## Output Representation
+
+![Output1](./assets/img/visualOutput.png)
+![Output2](./assets/img/visualOutput2.png)
+
 ### Links and Resources
 
 - [CI/CD](https://github.com/dustinapodaca/caps/actions) (GitHub Actions)
