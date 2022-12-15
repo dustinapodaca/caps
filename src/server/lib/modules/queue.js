@@ -51,6 +51,7 @@ class Queue {
     this.delete(name);
     return payload;
   }
+
 }
 
 module.exports = Queue;

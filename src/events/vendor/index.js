@@ -11,10 +11,10 @@ const socket = io(`http://localhost:3001/caps`); // replace with deployed URL wh
 const randomStore = chance.pickone(['1-800-flowers', 'acme-widgets']);
 socket.emit('join', randomStore);
 
-// socket.emit('getAll', {
-//   store: randomStore,
-//   event: 'received',
-// });
+socket.emit('getAll', {
+  store: randomStore,
+  event: 'delivered',
+});
 
 let intervalID;
 
@@ -36,18 +36,37 @@ function readyForPickUp() {
       payload: payload,
     });
     stop();
-  }, 3000);
+  }, 3500);
 
-  socket.on('delivered', (payload) => {
+  socket.on('in-transit', (payload, messageID) => {
+    console.log('VENDOR:------------ IN-TRANSIT ------------')
+    console.log('Thank you,', payload.payload.customer);
+    console.log('Order:', payload.payload.orderID);
+    console.log('Is in transit to: ');
+    console.log(payload.payload.address);
+    socket.emit('received', {
+      store: payload.payload.store,
+      messageID: messageID,
+      event: payload.event,
+    });
+  });
+
+  socket.on('delivered', (payload, messageID) => {
+    console.log('VENDOR:------------ DELIVERED ------------')
     console.log('Thank you,', payload.payload.customer);
     console.log('Order:', payload.payload.orderID);
     console.log('Has been successfully delivered to: ');
     console.log(payload.payload.address);
+    socket.emit('received', {
+      store: payload.payload.store,
+      messageID: messageID,
+      event: payload.event,
+    });
   });
 };
 
 function stop() {
-  clearInterval(intervalID, 4000);
+  clearInterval(intervalID, 4500);
 };
 
 readyForPickUp();
