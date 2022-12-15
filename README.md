@@ -47,63 +47,63 @@
   - `eventPool.on('event', payload)` - to listen for all events
 
 - Vendor:
-  - `pickup` - emits to simulate a new order being placed and ready for pickup
-  - `delivered` - listens to simulate a package being delivered
+  - `'pickup'` - emits to simulate a new order being placed and ready for pickup
+  - `'delivered'` - listens to simulate a package being delivered
 
 - Driver:
-  - `pickedUp` - listens to simulate a package being picked up
-  - `in-transit` - emits to simulate a package in transit
-  - `delivered` - emits to simulate a package being delivered
+  - `'pickedUp'` - listens to simulate a package being picked up
+  - `'in-transit'` - emits to simulate a package in transit
+  - `'delivered'` - emits to simulate a package being delivered
 
 ### Phase 2: Socket.io
 
 - Socket.io Hub:
-  - `logger` - to log all events
   - `io` - Socket.io server instance
   - `caps` - Socket.io namespace
+  - `logger` - to log all events
   - `caps.on('connection', socket)` - to listen for new connections
   - `socket.on('event', payload)` - to listen for all events.
 
 - Vendor:
-  - `pickup` - emits to simulate a new order being placed and ready for pickup
-  - `delivered` - listens to simulate a package being delivered
+  - `'pickup'` - emits to simulate a new order being placed and ready for pickup
+  - `'delivered'` - listens to simulate a package being delivered
 
 - Driver:
-  - `pickedUp` - listens to simulate a package being picked up
-  - `in-transit` - emits to simulate a package in transit
-  - `delivered` - emits to simulate a package being delivered
+  - `'pickedUp'` - listens to simulate a package being picked up
+  - `'in-transit'` - emits to simulate a package in transit
+  - `'delivered'` - emits to simulate a package being delivered
 
 ### Phase 3: Message Queues
 
 - Socket.io Hub:
-  - `logger` - to log all events
   - `io` - Socket.io server instance
   - `caps` - Socket.io namespace
+  - `logger` - to log all events
   - `caps.on('connection', socket)` - to listen for new connections
-  - `socket.join` - room implementation for each vendor
-  - `socket.on('event', payload)` - to listen for all events in each room and add the appropriate payloads to the created Queues.
-  - `socket.on('getAll', payload)` - to listen for and get all messages for all events in each room.
-  - `socket.on('received', payload)` - to listen for and remove an instance off the queue for a specific event in each room.
+  - `socket.join(storeRoom)` - room implementation for each vendor
+  - `socket.on('event', payload)` - to listen for all events within each room and add the appropriate payloads to their respective Queues
+  - `socket.on('getAll', payload)` - to listen for and get all messages for all events in each room
+  - `socket.on('received', payload)` - to listen for and remove an instance off the queue for a specific event in each room
 
 - Queue Data Structure:
-  - `new Queue()` - create new Queue to store all stores, events, and payloads for drivers and vendors.
-  - `queue.enqueue` - to add a payload to the queue.
-  - `queue.delete` - to remove a payload from the queue.
-  - `queue.read` - to read a specific payload in the queue.
-  - `queue.readAll` - to read all payloads in the queue.
+  - `new Queue()` - create new Queue instance
+  - `queue.enqueue()` - to add a payload to the appropriate Queue
+  - `queue.delete()` - to remove a payload from the appropriate Queue
+  - `queue.read()` - to read a specific payload in the appropriate Queue
+  - `queue.readAll()` - to read all payloads in the appropriate Queue
 
 - Vendor:
-  - `pickup` - emits to simulate a new order being placed and ready for pickup
-  - `delivered` - listens to simulate a package being delivered
-  - `getAll` - emits to get all messages for all events in Vendor Queue.
-  - `received` - emits to remove an instance off the queue for a specific event received in Vendor Queue.
+  - `'pickup'` - emits to simulate a new order being placed and ready for pickup
+  - `'delivered'` - listens to simulate a package being delivered
+  - `'getAll'` - emits to get all messages for all events in Vendor Queue
+  - `'received'` - emits to remove an instance off the queue for a specific event received in Vendor Queue
 
 - Driver:
-  - `pickedUp` - listens to simulate a package being picked up
-  - `in-transit` - emits to simulate a package in transit
-  - `delivered` - emits to simulate a package being delivered
-  - `getAll` - emits to get all messages for all events in Driver Queue.
-  - `received` - emits to remove an instance off the queue for a specific event received in Driver Queue.
+  - `'pickedUp'` - listens to simulate a package being picked up
+  - `'in-transit'` - emits to simulate a package in transit
+  - `'delivered'` - emits to simulate a package being delivered
+  - `'getAll'` - emits to get all messages for all events in Driver Queue
+  - `'received'` - emits to remove an instance off the queue for a specific event received in Driver Queue
 
 ### Tests
 
