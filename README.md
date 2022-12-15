@@ -4,6 +4,7 @@
 
 ### Phase 1: Event Driven Applications
 ### Phase 2: Socket.io
+### Phase 3: Message Queues
 ---
 
 ##  Problem Domain
@@ -19,6 +20,12 @@
 
 - The intent is to build the data services that would drive a suite of applications where one can see pickups and deliveries in real-time.
 
+### Phase 3: Message Queues
+
+- Implement a system to guarantee that notification payloads are read by their intended subscriber. Rather than just triggering an event notification and hope that client applications respond, implement a “Queue” system so that nothing gets lost.
+
+- Every event sent will be logged and held onto by the server until the intended recipient acknowledges that they received the message. At any time, a subscriber can get all of the messages they might have missed.
+
 ### Links and Resources
 
 - [CI/CD](https://github.com/dustinapodaca/caps/actions) (GitHub Actions)
@@ -28,9 +35,9 @@
 #### How to initialize/run your application (where applicable)
 
 - `npm start`
+- `nodemon`
 - `node hub.js`
 - `node index.js`
-- `nodemon`
 
 ##  Features / Routes
 ### Phase 1: Event Driven Applications
@@ -66,6 +73,38 @@
   - `in-transit` - emits to simulate a package in transit
   - `delivered` - emits to simulate a package being delivered
 
+### Phase 3: Message Queues
+
+- Socket.io Hub:
+  - `logger` - to log all events
+  - `io` - Socket.io server instance
+  - `caps` - Socket.io namespace
+  - `caps.on('connection', socket)` - to listen for new connections
+  - `socket.join` - room implementation for each vendor
+  - `socket.on('event', payload)` - to listen for all events in each room and add the appropriate payloads to the created Queues.
+  - `socket.on('getAll', payload)` - to listen for and get all messages for all events in each room.
+  - `socket.on('received', payload)` - to listen for and remove an instance off the queue for a specific event in each room.
+
+- Queue Data Structure:
+  - `new Queue()` - create new Queue to store all stores, events, and payloads for drivers and vendors.
+  - `queue.enqueue` - to add a payload to the queue.
+  - `queue.delete` - to remove a payload from the queue.
+  - `queue.read` - to read a specific payload in the queue.
+  - `queue.readAll` - to read all payloads in the queue.
+
+- Vendor:
+  - `pickup` - emits to simulate a new order being placed and ready for pickup
+  - `delivered` - listens to simulate a package being delivered
+  - `getAll` - emits to get all messages for all events in Vendor Queue.
+  - `received` - emits to remove an instance off the queue for a specific event received in Vendor Queue.
+
+- Driver:
+  - `pickedUp` - listens to simulate a package being picked up
+  - `in-transit` - emits to simulate a package in transit
+  - `delivered` - emits to simulate a package being delivered
+  - `getAll` - emits to get all messages for all events in Driver Queue.
+  - `received` - emits to remove an instance off the queue for a specific event received in Driver Queue.
+
 ### Tests
 
 - How do you run tests?
@@ -79,4 +118,8 @@ Link to an image of the UML for your application and response to events:
 
 ### Phase 2: Socket.io
 
-![UML](./assets/img/UML-SocketListener.png)
+![UML2](./assets/img/UML-SocketListener.png)
+
+### Phase 3: Message Queues
+
+![UML3](./assets/img/UML-SocketQueues.png)

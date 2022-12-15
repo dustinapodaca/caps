@@ -3,7 +3,7 @@
 // socket driver test
 // mock socket
 
-let socket = require('../../../socket');
+let socket = require('../../server/lib/modules/socket');
 const driver = require('../driver');
 
 jest.mock('../../../socket', () => {

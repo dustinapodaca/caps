@@ -1,22 +1,19 @@
 'use strict';
 
-const Chance = require('chance');
-const chance = new Chance();
-
 require('dotenv').config();
 const { io } = require('socket.io-client');
 const socket = io(`http://localhost:3001/caps`); // replace with deployed URL when deployed
-// const PORT = process.env.PORT || 3002;
+const chance = require('../../server/lib/modules/newChance');
 
 const randomStore = chance.pickone(['1-800-flowers', 'acme-widgets']);
+let intervalID;
+
 socket.emit('join', randomStore);
 
 socket.emit('getAll', {
   store: randomStore,
   event: 'delivered',
 });
-
-let intervalID;
 
 //currying
 // let callForPickUp = readyForPickUp(socket);
@@ -39,7 +36,7 @@ function readyForPickUp() {
   }, 3500);
 
   socket.on('in-transit', (payload, messageID) => {
-    console.log('VENDOR:------------ IN-TRANSIT ------------')
+    console.log('VENDOR:------------------- IN-TRANSIT -------------------')
     console.log('Thank you,', payload.payload.customer);
     console.log('Order:', payload.payload.orderID);
     console.log('Is in transit to: ');
@@ -52,7 +49,7 @@ function readyForPickUp() {
   });
 
   socket.on('delivered', (payload, messageID) => {
-    console.log('VENDOR:------------ DELIVERED ------------')
+    console.log('VENDOR:------------------- DELIVERED -------------------')
     console.log('Thank you,', payload.payload.customer);
     console.log('Order:', payload.payload.orderID);
     console.log('Has been successfully delivered to: ');
