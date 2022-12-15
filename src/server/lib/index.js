@@ -117,7 +117,7 @@ caps.on('connection', (socket) => {
       let currentQueue;
       if (payload.event === 'pickup') {
         currentQueue = storeQueue.read('driverQueue');
-      } else if (payload.event === 'delivered') {
+      } else if (payload.event === 'delivered' || payload.event === 'in-transit') {
         currentQueue = storeQueue.read('vendorQueue');
       } else {
         throw new Error('No Queue Found');
