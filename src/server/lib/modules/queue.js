@@ -20,6 +20,7 @@ class Queue {
   delete(name) {
     let deleted = this.data[name];
     delete this.data[name];
+    console.log('------------------------- DELETED -------------------------');
     console.log('deleted:', deleted);
     return deleted;
   }
@@ -40,7 +41,6 @@ class Queue {
     return Object.keys(this.data);
   }
 
-
   enqueue(name, payload) {
     this.store(name, payload);
   }
@@ -51,7 +51,6 @@ class Queue {
     this.delete(name);
     return payload;
   }
-
 }
 
 module.exports = Queue;

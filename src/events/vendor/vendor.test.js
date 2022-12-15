@@ -1,6 +1,6 @@
 'use strict';
 
-const eventPool = require('../../../EventEmitter');
+const eventPool = require('../../server/lib/modules/EventEmitter');
 require('./index');
 
 jest.mock('../../../EventEmitter');

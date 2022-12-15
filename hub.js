@@ -1,8 +1,8 @@
-// 'use strict';
+'use strict';
 
-// require('dotenv').config();
-// const io = require('./src/server/lib');
+require('dotenv').config();
+const io = require('./src/server/lib');
 
-// // const PORT = process.env.PORT || 3002;
+// const PORT = process.env.PORT || 3002;
 
-// io.start(3001);
+io.start(3001);
