@@ -12,13 +12,13 @@ socket.on('pickup', pickedUp);
 
 function pickedUp(payload) {
   setTimeout(() => {
-    console.log('DRIVER: picked up', payload.orderID);
+    console.log('DRIVER: picked up', payload.payload.orderID);
     // eventPool.emit('IN-TRANSIT', payload);
     socket.emit('in-transit', payload);
   }, 1000);
 
   setTimeout(() => {
-    console.log('DRIVER: delivered', payload.orderID);
+    console.log('DRIVER: delivered', payload.payload.orderID);
     // eventPool.emit('DELIVERED', payload);
     socket.emit('delivered', payload);
   }, 2000);
